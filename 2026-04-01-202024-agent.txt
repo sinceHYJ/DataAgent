@@ -1,0 +1,1020 @@
+╭─── Claude Code v2.1.76 ──────────────────────────────────────────────────────╮
+│                                     │ Tips for getting started               │
+│            Welcome back!            │ √ Run /init to create a CLAUDE.md fil… │
+│                                     │ ────────────────────────────────────── │
+│               ▐▛███▜▌               │ Recent activity                        │
+│              ▝▜█████▛▘              │ No recent activity                     │
+│                ▘▘ ▝▝                │                                        │
+│                                     │                                        │
+│   glm-5-turbo · API Usage Billing   │                                        │
+│       D:\cp\project\DataAgent       │                                        │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+ ‼Auth conflict: Both a token (ANTHROPIC_AUTH_TOKEN) and an API key 
+  (ANTHROPIC_API_KEY) are set. This may lead to unexpected behavior.
+    • Trying to use ANTHROPIC_AUTH_TOKEN? Unset the ANTHROPIC_API_KEY 
+    environment variable, or claude /logout then say "No" to the API key 
+    approval before login.
+    • Trying to use ANTHROPIC_API_KEY? Unset the ANTHROPIC_AUTH_TOKEN 
+    environment variable.
+
+> 帮我分析后端项目中，创建了agent 后是如何使用的？代码入口在哪里                
+  ⎿  Interrupted · What should Claude do instead?
+
+> /init                                                                         
+
+● Explore(Explore codebase architecture)
+  ⎿  Done (55 tool uses · 93.8k tokens · 4m 18s)
+  (ctrl+o to expand)
+
+>                                                                               
+
+● Now let me read a few key files to verify specific details before writing the
+  CLAUDE.md.
+
+● Read 4 files (ctrl+o to expand)
+
+● Now I have all the information needed. Let me create the CLAUDE.md file.
+
+● Write(CLAUDE.md)
+  ⎿  Wrote 104 lines to CLAUDE.md
+     # CLAUDE.md
+
+     This file provides guidance to Claude Code (claude.ai/code) when
+     working with code in this repository.
+
+     ## Project Overview
+
+     DataAgent is an enterprise-grade intelligent data analysis agent built
+     on Spring AI Alibaba Graph. It performs NL2SQL, Python deep analysis,
+     and multi-dimensional chart report generation. Full-stack: Spring Boot
+     (WebFlux) backend + Vue 3 frontend.
+
+     ## Build Commands
+
+
+
+     … +94 lines (ctrl+o to expand)
+
+● CLAUDE.md has been created. It covers:
+
+  - Build commands — build, test, format, lint, run backend/frontend, single
+  test execution
+  - Architecture — backend layered structure, StateGraph workflow pipeline, key
+  design patterns
+  - Technical constraints — WebFlux (not MVC), annotation-only MyBatis,
+  auto-formatting, license headers, config prefix
+  - Commit conventions — conventional commits format
+  - Database & dependencies — config, profiles, vector store options
+
+  Now regarding your earlier question about how agents are created and used in
+  the backend — you interrupted that request. Would you like me to still
+  investigate the agent creation and usage flow?
+
+✻ Brewed for 6m 17s
+
+> /config                                                                       
+  ⎿  Config dialog dismissed
+
+> /config                                                                       
+  ⎿  Set response language to 中文
+
+> 将claud.MD 翻译为中文                                                         
+
+● Read 1 file (ctrl+o to expand)
+
+● Write(CLAUDE.md)
+  ⎿  Added 60 lines, removed 60 lines
+        1  # CLAUDE.md                                                   
+        2                                                                
+        3 -This file provides guidance to Claude Code (claude.ai/code)   
+          -when working with code in this repository.                    
+        3 +本文件为 Claude Code (claude.ai/code)                         
+          +在此仓库中工作时提供指导。                                    
+        4                                                                
+        5 -## Project Overview                                           
+        5 +## 项目概述                                                   
+        6                                                                
+        7 -DataAgent is an enterprise-grade intelligent data analysis    
+          -agent built on Spring AI Alibaba Graph. It performs NL2SQL,   
+          -Python deep analysis, and multi-dimensional chart report      
+          -generation. Full-stack: Spring Boot (WebFlux) backend + Vue 3 
+          - frontend.                                                    
+        7 +DataAgent 是基于 Spring AI Alibaba Graph                      
+          +构建的企业级智能数据分析 Agent。支持 NL2SQL、Python           
+          +深度分析及多维图表报告生成。全栈架构：Spring Boot (WebFlux)   
+          +后端 + Vue 3 前端。                                           
+        8                                                                
+        9 -## Build Commands                                             
+        9 +## 构建命令                                                   
+       10                                                                
+       11 -Requires Java 17 and Maven (use `mvnd` for daemon mode, or    
+          -`./mvnw` for wrapper).                                        
+       11 +需要 Java 17 和 Maven（推荐使用 `mvnd` 守护进程模式，或       
+          +`./mvnw`）。                                                  
+       12                                                                
+       13  ```bash                                                       
+       14 -make build                # Build (skip tests)                
+       15 -make test                 # Run all tests                     
+       16 -make format-fix           # Auto-format Java code             
+          - (spring-javaformat)                                          
+       17 -make spotless-apply       # Apply license headers + formatting
+          - (spotless)                                                   
+       18 -make format-check         # Validate code formatting          
+       19 -make checkstyle-check     # Run checkstyle                    
+       20 -make lint                 # Run all linters                   
+       14 +make build                # 构建（跳过测试）                  
+       15 +make test                 # 运行所有测试                      
+       16 +make format-fix           # 自动格式化 Java 代码              
+          + (spring-javaformat)                                          
+       17 +make spotless-apply       # 应用 license 头 + 格式化          
+          + (spotless)                                                   
+       18 +make format-check         # 检查代码格式                      
+       19 +make checkstyle-check     # 运行 checkstyle                   
+       20 +make lint                 # 运行所有 linter                   
+       21                                                                
+       22 -# Run backend (port 8065)                                     
+       22 +# 启动后端（端口 8065）                                       
+       23  cd data-agent-management && ./mvnw spring-boot:run            
+       24                                                                
+       25 -# Run with H2 in-memory DB (no MySQL needed)                  
+       25 +# 使用 H2 内存数据库启动（无需 MySQL）                        
+       26  cd data-agent-management && ./mvnw spring-boot:run            
+           -Dspring-boot.run.profiles=h2                                 
+       27                                                                
+       28 -# Run frontend                                                
+       28 +# 启动前端                                                    
+       29  cd data-agent-frontend && npm install && npm run dev          
+       30                                                                
+       31 -# Run a single test class                                     
+       31 +# 运行单个测试类                                              
+       32  ./mvnw test -pl data-agent-management -Dtest=ClassName        
+       33                                                                
+       34 -# Run a single test method                                    
+       34 +# 运行单个测试方法                                            
+       35  ./mvnw test -pl data-agent-management                         
+           -Dtest=ClassName#methodName                                   
+       36  ```                                                           
+       37                                                                
+       38 -## Architecture                                               
+       38 +## 架构                                                       
+       39                                                                
+       40 -### Backend (`data-agent-management/`)                        
+       40 +### 后端 (`data-agent-management/`)                           
+       41                                                                
+       42 -Package root: `com.alibaba.cloud.ai.dataagent`                
+       42 +包路径根目录：`com.alibaba.cloud.ai.dataagent`                
+       43                                                                
+       44 -**Layered structure** — Controller → Service (interface +     
+          -impl) → Mapper → Entity                                       
+       44 +**分层结构** — Controller → Service（接口 + 实现）            
+          + → Mapper → Entity                                            
+       45                                                                
+       46 -- `controller/` — REST endpoints under `/api/*`               
+       47 -- `service/` — Business logic (interface + impl pattern)      
+       48 -- `mapper/` — MyBatis mapper interfaces (annotation-based, no 
+          - XML files)                                                   
+       49 -- `entity/` — Database entities (Lombok)                      
+       50 -- `dto/`, `vo/` — Request/response objects                    
+       51 -- `workflow/` — Core StateGraph pipeline (see below)          
+       52 -- `connector/` — Multi-database connector abstraction (MySQL, 
+          - PostgreSQL, Oracle, SQL Server, H2, Dameng, Hive)            
+       53 -- `prompt/` — LLM prompt templates                            
+       54 -- `config/` — Spring configuration classes                    
+       46 +- `controller/` — REST 接口，统一前缀 `/api/*`                
+       47 +- `service/` — 业务逻辑（接口 + 实现类模式）                  
+       48 +- `mapper/` — MyBatis Mapper 接口（基于注解，无 XML 文件）    
+       49 +- `entity/` — 数据库实体（Lombok）                            
+       50 +- `dto/`、`vo/` — 请求/响应对象                               
+       51 +- `workflow/` — 核心 StateGraph 流水线（见下文）              
+       52 +- `connector/` —                                              
+          +多数据库连接器抽象（MySQL、PostgreSQL、Oracle、SQL            
+          +Server、H2、达梦、Hive）                                      
+       53 +- `prompt/` — LLM Prompt 模板                                 
+       54 +- `config/` — Spring 配置类                                   
+       55                                                                
+       56 -### StateGraph Workflow Pipeline                              
+       56 +### StateGraph 工作流流水线                                   
+       57                                                                
+       58 -The core NL2SQL pipeline is a directed graph in `workflow/`:  
+       58 +核心 NL2SQL 流水线为 `workflow/` 中的有向图：                 
+       59                                                                
+       60  ```                                                           
+       61  START → IntentRecognition → EvidenceRecall → QueryEnhance →   
+           SchemaRecall → TableRelation                                  
+       62 -  → FeasibilityAssessment → Planner → PlanExecutor →          
+          -[SQL/Python/Report steps]                                     
+       62 +  → FeasibilityAssessment → Planner → PlanExecutor →          
+          +[SQL/Python/Report 步骤]                                      
+       63    → ReportGenerator → END                                     
+       64  ```                                                           
+       65                                                                
+       66 -- `workflow/node/` — 16 graph nodes (each node handles one    
+          -pipeline step)                                                
+       67 -- `workflow/dispatcher/` — 11 edge dispatchers (route between 
+          - nodes based on state)                                        
+       68 -- `constant/Constant.java` — All state graph state            
+          -keys defined here as `public static final String`             
+       66 +- `workflow/node/` — 16                                       
+          +个图节点（每个节点处理一个流水线步骤）                        
+       67 +- `workflow/dispatcher/` — 11                                 
+          +个边调度器（根据状态在节点间路由）                            
+       68 +- `constant/Constant.java` — 所有状态图的 state key           
+          +定义在此，为 `public static final String`                     
+       69                                                                
+       70 -### Key Design Patterns                                       
+       70 +### 核心设计模式                                              
+       71                                                                
+       72 -- **Strategy** — `DatasourceTypeHandler` per DB type,         
+          -`FusionStrategy` (RRF/Weighted), `TextSplitter`,              
+          -`CodePoolExecutorService` (Docker/Local/AI Simulation)        
+       73 -- **Factory** — `DynamicModelFactory`,                        
+          -`FileStorageServiceFactory`, `HybridRetrievalStrategyFactory` 
+          -, `CodePoolExecutorServiceFactory`                            
+       74 -- **Registry** — `AiModelRegistry` for runtime model          
+          -hot-swapping; dynamic AOP proxy on `EmbeddingModel` bean      
+       75 -- **SSE Streaming** — `GraphController` streams via           
+          -Reactor `Sinks.Many<ServerSentEvent<>>`                       
+       72 +- **策略模式** — `DatasourceTypeHandler` 按数据库类型实现、   
+          +`FusionStrategy`（RRF/加权平均）、`TextSplitter`、            
+          +`CodePoolExecutorService`（Docker/本地/AI 模拟）              
+       73 +- **工厂模式** — `DynamicModelFactory`、                      
+          +`FileStorageServiceFactory`、`HybridRetrievalStrategyFactory` 
+          +、`CodePoolExecutorServiceFactory`                            
+       74 +- **注册模式** — `AiModelRegistry` 支持运行时模型热切换；通过 
+          + AOP 动态代理 `EmbeddingModel` Bean                           
+       75 +- **SSE 流式输出** — `GraphController` 通过                   
+          +Reactor `Sinks.Many<ServerSentEvent<>>` 实现流式推送          
+       76                                                                
+       77 -### Frontend (`data-agent-frontend/`)                         
+       77 +### 前端 (`data-agent-frontend/`)                             
+       78                                                                
+       79 -Vue 3 + TypeScript + Vite + Element Plus + ECharts. See       
+          -`data-agent-frontend/README-CODE-STYLE.md`                    
+          - for style conventions.                                       
+       79 +Vue 3 + TypeScript + Vite + Element Plus + ECharts            
+          +。代码风格规范见 `data-agent-frontend/README-CODE-STYLE.md`。 
+       80                                                                
+       81 -## Key Technical Constraints                                  
+       81 +## 关键技术约束                                               
+       82                                                                
+       83 -- **WebFlux, NOT Spring MVC** — Controllers return            
+          -`Mono`/`Flux`, use reactive types throughout                  
+       84 -- **MyBatis annotations only** — No XML mapper files; all SQL 
+          -is in `@Select`/`@Insert`/`@Update`/`@Delete` annotations     
+       85 -- **Code auto-formatting on build** — `spring-javaformat` and 
+          - `spotless` plugins run automatically during compilation      
+       86 -- **Apache 2.0 license headers** — Required on all source     
+          -files, auto-applied by spotless                               
+       87 -- **Configuration prefix** — `spring.ai.alibaba.data-agent`   
+          -for all custom properties                                     
+       88 -- **Code executor** — Requires Docker for Python execution    
+          -(or set `code-pool-executor: local` in config)                
+       89 -- **Port** — Backend runs on 8065                             
+       83 +- **WebFlux，非 Spring MVC** — Controller 返回                
+          +`Mono`/`Flux`，全程使用响应式类型                             
+       84 +- **MyBatis 仅使用注解** — 无 XML Mapper 文件；所有 SQL 写在  
+          +`@Select`/`@Insert`/`@Update`/`@Delete` 注解中                
+       85 +- **构建时自动格式化** — `spring-javaformat` 和 `spotless`    
+          +插件在编译时自动执行                                          
+       86 +- **Apache 2.0 License 头** — 所有源文件必须包含，由 spotless 
+          + 自动添加                                                     
+       87 +- **配置前缀** — 所有自定义配置项前缀为                       
+          +`spring.ai.alibaba.data-agent`                                
+       88 +- **代码执行器** — Python 执行需要 Docker（或在配置中设置     
+          +`code-pool-executor: local` 使用本地执行）                    
+       89 +- **端口** — 后端运行在 8065                                  
+       90                                                                
+       91 -## Commit Convention                                          
+       91 +## 提交规范                                                   
+       92                                                                
+       93 -Conventional Commits: `type(scope): description`              
+          - (lowercase subject, no leading uppercase)                    
+       94 -Types: `fix`, `feat`, `refactor`, `docs`, `chore`, `perf`,    
+          -`infra`, `revert`, `release`, `test`, `style`                 
+       93 +Conventional Commits 格式：`type(scope): description`         
+          +（主题小写，不以大写开头）                                    
+       94 +类型：`fix`、`feat`、`refactor`、`docs`、`chore`、`perf`、    
+          +`infra`、`revert`、`release`、`test`、`style`                 
+       95                                                                
+       96 -## Database                                                   
+       96 +## 数据库                                                     
+       97                                                                
+       98 -- Management DB: MySQL by default (env vars                   
+          -`DATA_AGENT_DATASOURCE_URL/USERNAME/PASSWORD`), H2 for dev    
+          -profile                                                       
+       99 -- Schema init: `sql/schema.sql` + `sql/data.sql` (set         
+          -`DATA_AGENT_DATASOURCE_SQL_INIT=always` to auto-init)         
+      100 -- Vector store: In-memory `SimpleVectorStore`                 
+          -default, supports Elasticsearch/PGVector/Milvus               
+       98 +- 管理库：默认 MySQL（通过环境变量                            
+          +`DATA_AGENT_DATASOURCE_URL/USERNAME/PASSWORD`                 
+          +配置），开发环境可用 H2                                       
+       99 +- Schema 初始化：`sql/schema.sql` + `sql/data.sql`（设置      
+          +`DATA_AGENT_DATASOURCE_SQL_INIT=always` 自动初始化）          
+      100 +- 向量存储：默认内存 `SimpleVectorStore`，支持                
+          +Elasticsearch/PGVector/Milvus                                 
+      101                                                                
+      102 -## Key Dependencies                                           
+      102 +## 核心依赖                                                   
+      103                                                                
+      104 -Spring Boot 3.4.8 | Spring AI 1.1.0 | Spring AI Alibaba       
+          -1.1.0.0 | MyBatis 3.0.4 | Druid | SpringDoc OpenAPI 2.8.8 |   
+          -Docker Java 3.5.3 | Langfuse (optional)                       
+      104 +Spring Boot 3.4.8 | Spring AI 1.1.0 | Spring AI Alibaba       
+          +1.1.0.0 | MyBatis 3.0.4 | Druid | SpringDoc OpenAPI 2.8.8 |   
+          +Docker Java 3.5.3 | Langfuse（可选）                          
+
+● 已将 CLAUDE.md 翻译为中文版本，保留了所有代码块、命令和技术术语的准确性。
+
+✻ Churned for 1m 13s
+
+> 帮我画出StateGraph 工作流的graph 图，各node及edge 的路由策略                  
+
+● Explore(Explore StateGraph workflow nodes)
+  ⎿  Done (35 tool uses · 78.9k tokens · 2m 43s)
+  (ctrl+o to expand)
+
+● 以下是完整的 StateGraph 工作流图：
+
+                                      START
+                                        │
+                                        ▼
+                          ┌─────────────────────────┐
+                          │   IntentRecognitionNode  │
+                          │     意图识别：判断是否    │
+                          │     为数据分析类请求      │
+                          └────────────┬────────────┘
+                                       │
+                            [IntentRecognitionDispatcher]
+                          ┌────────────┴────────────┐
+                          │                         │
+                分类=《闲聊或无关指令》        分类=数据分析相关
+                    │                         │
+                    ▼                         ▼
+                   END            ┌─────────────────────┐
+                                  │  EvidenceRecallNode  │
+                                  │  证据召回：检索业务   │
+                                  │  术语和Agent知识      │
+                                  └─────────┬───────────┘
+                                            │
+                                     （无条件边）
+                                            │
+                                            ▼
+                                  ┌─────────────────────┐
+                                  │   QueryEnhanceNode   │
+                                  │  查询增强：结合证据   │
+                                  │  和多轮上下文改写查询  │
+                                  └─────────┬───────────┘
+                                            │
+                                   [QueryEnhanceDispatcher]
+                                  ┌────────────┴────────────┐
+                                  │                         │
+                        canonicalQuery                 canonicalQuery
+                        或 expandedQueries               与 expandedQueries
+                        为空                            均有效
+                            │                         │
+                            ▼                         ▼
+                           END              ┌─────────────────────┐
+                                            │  SchemaRecallNode    │
+                                            │  Schema召回：从向量库 │
+                                            │  检索相关表和列文档   │
+                                            └─────────┬───────────┘
+                                                      │
+                                             [SchemaRecallDispatcher]
+                                            ┌────────────┴────────────┐
+                                            │                         │
+                                   tableDocuments空           tableDocuments非空
+                                       │                         │
+                                       ▼                         ▼
+                                      END           ┌──────────────────────┐
+                                                    │  TableRelationNode     │
+                                                    │  表关系推断：推导JOIN、  │
+                                                    │  外键，构建初始Schema   │
+                                                    └──────────┬────────────┘
+                                                               │
+                                                     [TableRelationDispatcher]
+                                                  ┌────────────┼────────────┐
+                                                  │            │            │
+                                           可重试异常     成功(output
+  不可重试异常
+                                           retry<3       存在)
+  或达到最大重试
+                                                │         │                │
+                                                ▼         ▼                ▼
+                                     ┌──────────────┐  ┌────────────────────┐
+                                     │TableRelation │  │FeasibilityAssess  │
+                                     │Node (重试)    │  │mentNode           │
+                                     └──────────────┘  │可行性评估：判断需求 │
+                                                       │是否可执行数据分析    │
+                                                       └─────────┬──────────┘
+                                                                 │
+
+  [FeasibilityAssessmentDispatcher]
+                                                   ┌────────────┴────────────┐
+                                                   │                         │
+                                         包含"《数据分析》"
+  其他（需澄清/闲聊）
+                                                │                         │
+                                                ▼                         ▼
+                                    ┌───────────────────┐                END
+                                    │   PlannerNode      │
+                                    │   规划器：生成多步  │
+                                    │   执行计划          │
+                                    └─────────┬─────────┘
+                                              │
+                                       （无条件边）
+                                              │
+                                              ▼
+                                    ┌───────────────────┐
+                                    │  PlanExecutorNode
+  │◄──────────────────────┐
+                                    │  计划执行器：验证   │
+     │
+                                    │  计划并路由到下一步  │
+      │
+                                    └─────────┬─────────┘
+   │
+                                              │
+   │
+                                      [PlanExecutorDispatcher]
+   │
+                   ┌──────────┬──────────┬──────────┬──────────┬──────────┐
+  │
+                   │          │          │          │          │          │
+  │
+            validation validation  NEXT=     NEXT=     NEXT=     repair   │
+  │
+             passed    failed   SQL_GEN    PY_GEN    REPORT    Count>2  │     │
+                │         │       _NODE     _NODE     _GEN      │       │     │
+                │         │        │         │         NODE      │       │     │
+                │         │        │         │         │        │       │     │
+                │    repair   ┌────┴────┐     │         │        │       │     │
+                │    Count<=2 │         │     │         │        │       │     │
+                │        │    │         │     │         │        │       │     │
+                │        ▼    ▼         │     ▼         ▼        ▼       │     │
+                │   ┌──────────────┐  │  ┌────────┐ ┌────────┐ ┌────────┐│     │
+                │   │ PlannerNode  │  │  │SqlGen  │ │PyGen   │ │Report  ││     │
+                │   │ (重新规划)    │  │  │Node    │ │Node    │ │Generator││
+   │
+                │   └──────────────┘  │  └───┬────┘ └───┬────┘ │Node    ││     │
+                │          │         │      │          │      └────┬───┘│     │
+                │          │         │      │          │           │    │     │
+                │          │         │      │          │           ▼    │     │
+                │          │         │      │          │          END    │     │
+                │          │         │      │          │                │     │
+                │          │         │      ▼          ▼                │     │
+                │          │         │  [SqlGen      (无条件边)          │     │
+                │          │         │  Dispatcher]                     │     │
+                │          │         │  ┌───┴───┬────────┐              │     │
+                │          │         │  │       │        │              │     │
+                │          │         │重试  sentinel  成功              │     │
+                │          │         │ │      │        │              │     │
+                │          │         │ ▼      ▼        ▼              │     │
+                │          │         │...    END  ┌──────────────┐     │     │
+                │          │         │              │SemanticConsist│     │
+  │
+                │          │         │              │encyNode      │     │     │
+                │          │         │              │语义一致性校验  │     │
+   │
+                │          │         │              └──────┬───────┘     │     │
+                │          │         │                     │             │     │
+                │          │         │          [SemanticConsistence     │     │
+                │          │         │           Dispatcher]             │     │
+                │          │         │            ┌────┴────┐            │     │
+                │          │         │         失败        通过          │     │
+                │          │         │            │         │            │     │
+                │          │         │            ▼         ▼            │     │
+                │          │         │     ┌──────────┐ ┌────────────┐  │     │
+                │          │         │     │SqlGenNode│ │SqlExecute  │  │     │
+                │          │         │     │(重新生成) │ │Node        │  │     │
+                │          │         │     └──────────┘ │SQL执行     │  │     │
+                │          │         │         ▲        └─────┬──────┘  │     │
+                │          │         │         │              │         │     │
+                │          │         │         │    [SQLExecutor           │
+   │
+                │          │         │         │     Dispatcher]          │
+  │
+                │          │         │         │      ┌─────┴─────┐       │
+  │
+                │          │         │         │  执行失败      执行成功    │
+    │
+                │          │         │         │      │            │       │
+   │
+                │          │         │         │      ▼            │       │
+   │
+                │          │         │         │  ┌──────────┐     │       │
+   │
+                │          │         │         │  │SqlGenNode│     │       │
+   │
+                │          │         │         │  │(重新生成) │     │       │
+    │
+                │          │         │         │  └──────────┘     │       │
+   │
+                │          │         │         │         ▲         │       │
+   │
+                │          │         │         │         │         │       │
+   │
+                │          │         │         │         │         │       │
+   │
+                └──────────┴─────────┴─────────┴─────────┴─────────┘       │
+                                            ▲                               │
+                                            └───────────────────────────────┘
+                                                    （回到PlanExecutor
+                                                      执行下一个步骤）
+
+                            ══════ Python 执行路径 ══════
+
+                            PythonGenerateNode
+                                  │
+                            （无条件边）
+                                  ▼
+                            PythonExecuteNode
+                                  │
+                         [PythonExecutorDispatcher]
+                         ┌────────┼────────┐
+                         │        │        │
+                     重试成功  fallback  执行成功
+                     tries<max  mode=true  │
+                         │        │        │
+                         ▼        │        ▼
+                   PythonGenerate  │  PythonAnalyzeNode
+                   Node (重试)     │  (LLM分析Python输出)
+                         │        │        │
+                         ▼        ▼        ▼
+                         └────────┴────────┘
+                                  │
+                            （无条件边）
+                                  │
+                                  ▼
+                         PlanExecutorNode（下一步循环）
+
+                            ══════ 人工审核路径 ══════
+
+                      当 HUMAN_REVIEW_ENABLED=true 时：
+
+                      PlanExecutorNode ──[NEXT=HUMAN_FEEDBACK]──▶
+  HumanFeedbackNode
+                                                                │
+                                                      [HumanFeedbackDispatcher]
+                                                        ┌──────┴──────┐
+                                                        │             │
+                                                  WAIT_FOR_     feedback
+                                                 FEEDBACK       approved
+                                                    │             │
+                                                    ▼             ▼
+                                                   END     PlanExecutorNode
+                                                         （继续执行）
+
+                                                feedback rejected
+                                                (repairCount<3)
+                                                    │
+                                                    ▼
+                                               PlannerNode
+                                               （结合反馈重新规划）
+
+  各节点和路由策略总结
+
+  节点总览（17个）
+
+  ┌───────────────────────────┬─────────────────────────────────────────┐
+  │           节点            │                  职责                   │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ IntentRecognitionNode     │ 意图识别，过滤闲聊和无关指令            │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ EvidenceRecallNode        │ 从向量库检索业务术语和Agent知识作为证据 │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ QueryEnhanceNode          │ 结合证据和多轮上下文增强/改写用户查询   │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ SchemaRecallNode          │ 从向量库检索相关的表和列文档            │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ TableRelationNode         │ 推导表间关系(JOIN/外键)，构建初始Schema │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ FeasibilityAssessmentNode │ 评估需求是否为可执行的数据分析任务      │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ PlannerNode               │ 生成多步执行计划(SQL/Python/报告)       │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ PlanExecutorNode          │ 验证计划并路由到对应执行节点            │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ SqlGenerateNode           │ 根据Schema和证据生成SQL                 │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ SemanticConsistencyNode   │ 语义一致性校验，验证SQL正确性           │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ SqlExecuteNode            │ 在实际数据库上执行SQL                   │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ PythonGenerateNode        │ 生成数据分析/可视化Python代码           │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ PythonExecuteNode         │ 在沙箱中执行Python代码(Docker/本地)     │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ PythonAnalyzeNode         │ 用LLM分析Python执行结果                 │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ ReportGeneratorNode       │ 汇总所有执行结果生成分析报告            │
+  ├───────────────────────────┼─────────────────────────────────────────┤
+  │ HumanFeedbackNode         │ 暂停等待人工审核计划(可选)              │
+  └───────────────────────────┴─────────────────────────────────────────┘
+
+  核心路由逻辑
+
+  ┌────────────────────┬────────────────────────┬───────────────────────────┐
+  │     Dispatcher     │        决策依据        │         路由规则          │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │ IntentRecognition  │ classification 字段    │ "闲聊/无关" → END；其他 → │
+  │                    │                        │  证据召回                 │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │ QueryEnhance       │ canonicalQuery         │ 无效 → END；有效 →        │
+  │                    │ 是否有效               │ Schema召回                │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │ SchemaRecall       │ tableDocuments         │ 空 → END；非空 →          │
+  │                    │ 是否为空               │ 表关系推断                │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │                        │ 可重试且<3次 →            │
+  │ TableRelation      │ 异常类型 + 重试计数    │ 自身重试；成功 →          │
+  │                    │                        │ 可行性评估；其他 → END    │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │ FeasibilityAssessm │ 输出是否包含"《数据分  │ 是 → 规划器；否 → END     │
+  │ ent                │ 析》"                  │                           │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │ 验证状态 +             │ 通过 → 路由到对应节点；失 │
+  │ PlanExecutor       │ PLAN_NEXT_NODE         │ 败且修复<3次 →            │
+  │                    │                        │ 重新规划；否则 → END      │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │                        │ 空且可重试 →              │
+  │ SqlGenerate        │ SQL输出 + 重试次数     │ 自身；sentinel →          │
+  │                    │                        │ END；有效 → 语义校验      │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │ SemanticConsistenc │ 校验结果布尔值         │ 通过 → SQL执行；失败 →    │
+  │ e                  │                        │ 重新生成SQL               │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │                        │ 执行失败 →                │
+  │ SQLExecutor        │ SQL_REGENERATE_REASON  │ 重新生成SQL；成功 →       │
+  │                    │                        │ 回到PlanExecutor          │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │                        │ 失败可重试 →              │
+  │ PythonExecutor     │ 成功状态 + 重试次数 +  │ 重新生成Python；fallback  │
+  │                    │ fallback               │ → 分析节点；成功 →        │
+  │                    │                        │ 分析节点                  │
+  ├────────────────────┼────────────────────────┼───────────────────────────┤
+  │                    │                        │ WAIT →                    │
+  │ HumanFeedback      │ human_next_node        │ END(暂停)；approved →     │
+  │                    │                        │ PlanExecutor；rejected →  │
+  │                    │                        │ PlannerNode               │
+  └────────────────────┴────────────────────────┴───────────────────────────┘
+
+  关键循环
+
+  1. SQL重试循环：SqlGenerate → SemanticConsistency → (失败) → SqlGenerate（最多
+   maxSqlRetryCount 次）
+  2. SQL执行重试：SqlExecute → (失败) → SqlGenerate → 重新生成并执行
+  3. Python重试循环：PythonExecute → (失败) → PythonGenerate（最多
+  pythonMaxTriesCount 次）
+  4. 计划步骤循环：PlanExecutor → 执行步骤(SQL/Python) → 回到PlanExecutor →
+  下一步 → ... → ReportGenerator → END
+  5. 计划修复循环：PlanExecutor → (验证失败) → PlannerNode →
+  PlanExecutor（最多3次）
+  6. 人工审核循环：HumanFeedbackNode → (拒绝) → PlannerNode →
+  HumanFeedbackNode（最多3次）
+
+✻ Cooked for 4m 30s
+
+> 那什么时候路由到 PythonGenerateNode?                                          
+
+● Searched for 3 patterns, read 5 files (ctrl+o to expand)
+
+● 现在逻辑很清晰了。路由到 PythonGenerateNode 的完整链路如下：
+
+  路由到 PythonGenerateNode 的机制
+
+  路由到 PythonGenerateNode 不是由 Dispatcher 直接判断的，而是由 LLM 在 
+  PlannerNode 中动态决定的。完整链路是：
+
+  1. PlannerNode 调用 LLM 生成执行计划
+
+  PlannerNode 调用 LLM，传入 Planner Prompt（planner.txt），LLM 根据用户问题和
+  Schema 自行判断需要哪些步骤，输出一个 Plan JSON 对象：
+
+  {
+    "thought_process": "分析思路...",
+    "execution_plan": [
+      { "step": 1, "tool_to_use": "SQL_GENERATE_NODE", ... },
+      { "step": 2, "tool_to_use": "PYTHON_GENERATE_NODE", ... },
+      { "step": 3, "tool_to_use": "REPORT_GENERATOR_NODE", ... }
+    ]
+  }
+
+  2. PlanExecutorNode 读取计划逐步路由
+
+  PlanExecutorNode（PlanExecutorNode.java:98-101）按当前步骤号读取
+  executionStep.getToolToUse()，如果值是 "PYTHON_GENERATE_NODE"，就设置
+  PLAN_NEXT_NODE = "PYTHON_GENERATE_NODE"：
+
+  ExecutionStep executionStep = executionPlan.get(currentStep - 1);
+  String toolToUse = executionStep.getToolToUse();
+  return determineNextNode(toolToUse);
+
+  3. PlanExecutorDispatcher 根据 PLAN_NEXT_NODE 路由
+
+  Dispatcher 读取 PLAN_NEXT_NODE，匹配到 "PYTHON_GENERATE_NODE" 就路由过去。
+
+  LLM 在什么情况下会生成 PYTHON_GENERATE_NODE？
+
+  根据 planner.txt Prompt 的指导，LLM 在以下场景会选择 Python：
+
+  ┌──────────────┬───────────────────────────────────────────────────────────┐
+  │     场景     │                           示例                            │
+  ├──────────────┼───────────────────────────────────────────────────────────┤
+  │ 复杂计算     │ 环比/同比增长率、排名、相关性分析、统计检验               │
+  ├──────────────┼───────────────────────────────────────────────────────────┤
+  │ 数据可视化   │ 绘制柱状图、折线图、散点图等图表                          │
+  ├──────────────┼───────────────────────────────────────────────────────────┤
+  │ SQL难以实现  │ 跨数据集联合计算、复杂的数据清洗和转换                    │
+  ├──────────────┼───────────────────────────────────────────────────────────┤
+  │ 用户明确要求 │ 用户反馈中提到"需要用Python"时（Prompt                    │
+  │              │ 中标注为最高优先级）                                      │
+  └──────────────┴───────────────────────────────────────────────────────────┘
+
+  NL2SQL 模式下不会路由到 Python
+
+  当 IS_ONLY_NL2SQL = true 时（PlannerNode.java:55-57），PlannerNode
+  直接返回硬编码的单步 SQL 计划，完全跳过 LLM 规划，自然不会出现 Python 步骤。
+
+  简化流程图
+
+  PlannerNode
+      │
+      ├─ IS_ONLY_NL2SQL=true → 硬编码: [SQL_GENERATE_NODE] → END
+      │
+      └─ IS_ONLY_NL2SQL=false → LLM根据Prompt动态生成多步Plan
+                                     │
+                                     ▼
+                              PlanExecutorNode (逐步执行)
+                                     │
+                       读取当前 step 的 toolToUse
+                       ┌──────────────┼──────────────┐
+                       ▼              ▼              ▼
+                SQL_GENERATE_NODE  PYTHON_GENERATE_NODE  REPORT_GENERATOR_NODE
+
+  总结：Python 步骤完全由 LLM 在规划阶段自主决定，系统本身没有硬编码的规则来触发
+   Python——Planner Prompt 告诉 LLM "SQL 难以满足需求时用
+  Python"，具体的判断交给模型。
+
+✻ Cogitated for 1m 39s
+
+> 那该项目是如何输出echats 图表的？                                             
+
+● Explore(Explore ECharts output flow)
+  ⎿  Done (71 tool uses · 97.4k tokens · 12m 31s)
+  (ctrl+o to expand)
+
+● 该项目有 两条独立的 ECharts 图表输出路径，Python 代码本身不直接生成图表。
+
+  路径一：SQL 结果图表（主要路径）
+
+  SqlExecuteNode
+      │
+      ├─ 1. 执行SQL，拿到 ResultSetBO（列名 + 数据行）
+      │
+      ├─ 2. 调用 LLM（data-view-analyze prompt）
+      │     根据数据特征推荐图表类型 → DisplayStyleBO
+      │     {
+      │       type: "bar" | "line" | "pie" | "column" | "table",
+      │       title: "图表标题",
+      │       x: "x轴字段名",
+      │       y: ["y轴字段名1", "y轴字段名2"]
+      │     }
+      │
+      ├─ 3. 包装为 ResultBO { resultSet, displayStyle }
+      │     以 TextType.RESULT_SET 通过 SSE 流式推送
+      │
+      ▼
+  前端 AgentRun.vue
+      │
+      ├─ 识别 textType=RESULT_SET
+      ├─ 渲染 ResultSetDisplay 组件
+      ├─ displayStyle.type != "table" 时渲染 ChartComponent
+      │
+      ▼
+  ChartComponent.vue
+      │
+      ├─ 读取 displayStyle (type/x/y)
+      ├─ ChartFactory.createChart(type) → BarChart / LineChart / PieChart
+      ├─ 从 resultSet.data 提取轴数据
+      ├─ 构建 ECharts option → echarts.setOption(option)
+
+  LLM 推荐图表类型的规则（data-view-analyze.txt）：
+  - 时间趋势 → line
+  - 分类对比 → column / bar
+  - 占比构成 → pie
+  - 原始数据 → table
+
+  路径二：Markdown 报告内嵌图表
+
+  ReportGeneratorNode
+      │
+      ├─ 生成 Markdown 报告，其中包含 ```echarts 代码块
+      │   内含原生 ECharts option JSON
+      │
+      ├─ 以 TextType.MARK_DOWN 通过 SSE 推送
+      │
+      ▼
+  前端 MarkdownAgentContainer.vue
+      │
+      ├─ markdown-plugin-echarts.ts 拦截 ```echarts 代码块
+      ├─ 渲染为 <div class="md-echarts">{JSON}</div>
+      ├─ 遍历所有 .md-echarts 元素
+      ├─ echarts.init(element) → chart.setOption(JSON.parse(content))
+
+  这种路径支持任意 ECharts 图表类型（散点图、雷达图、热力图等），不受路径一的 5
+  种类型限制。
+
+  Python 的角色
+
+  Python 在整个图表流程中不直接生成图表，它的职责是：
+
+  PythonGenerateNode → 生成 Python 代码（JSON输入，JSON输出，禁止绘图）
+                            │
+  PythonExecuteNode → 在 Docker(anaconda3) 或本地执行
+                            │  输入: SQL查询结果 (JSON via stdin)
+                            │  输出: 分析结果 (JSON via stdout)
+                            │
+  PythonAnalyzeNode → LLM 将 JSON 输出总结为自然语言
+                            │
+                            ▼
+                     分析结论存入 step_N_analysis
+                     供后续 ReportGeneratorNode 引用
+
+  完整数据流
+
+  用户提问
+    │
+    ▼
+  SQL执行 → ResultSet + DisplayStyleBO ──SSE──▶ 前端ECharts直接渲染（柱/线/饼）
+    │
+    ▼
+  Python执行 → JSON分析结果 → LLM总结 ──┐
+    │                                   │
+    ▼                                   ▼
+  ReportGeneratorNode 生成Markdown ──SSE──▶
+  前端渲染Markdown（含内嵌echarts图表）
+
+  总结：ECharts 图表完全在前端渲染。后端只负责决定"展示什么类型的图表"（DisplayS
+  tyleBO）和"展示什么数据"（ResultSet），前端根据这些元数据调用 ECharts API
+  完成实际绘制。
+
+✻ Cooked for 14m 6s
+
+> 那某个agent 是如何实现session 记忆的？                                        
+
+● Explore(Explore session memory mechanism)
+  ⎿  Done (59 tool uses · 76.7k tokens · 6m 56s)
+  (ctrl+o to expand)
+
+● 该项目采用双层记忆架构：
+
+  架构总览
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                    持久层（数据库）                        │
+  │          ChatSession + ChatMessage 表                    │
+  │     职责：前端展示、历史消息回看                            │
+  │     管理方：前端调用 REST API 读写                         │
+  │     ⚠️ 工作流不读取此层                                    │
+  └─────────────────────────────────────────────────────────┘
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                 运行时记忆层（内存）                       │
+  │           MultiTurnContextManager                        │
+  │     职责：驱动 AI 工作流的多轮推理                          │
+  │     管理方：GraphServiceImpl 生命周期管理                   │
+  │     ⚠️ 服务重启后丢失（代码中有 TODO 待持久化）              │
+  └─────────────────────────────────────────────────────────┘
+
+  运行时记忆核心：MultiTurnContextManager
+
+  文件：service/graph/Context/MultiTurnContextManager.java
+
+  数据结构
+
+  // 每个 threadId 对应一个对话历史队列
+  Map<String, Deque<ConversationTurn>> history;      // 已完成的轮次
+  Map<String, PendingTurn> pendingTurns;             // 当前进行中的轮次
+
+  // ConversationTurn = record(String userQuestion, String plan)
+  // PendingTurn = { userQuestion, StringBuilder planBuilder }
+
+  生命周期
+
+  用户发起请求 (threadId=abc, query="A产品销量如何")
+      │
+      ▼
+  ① buildContext("abc")
+      │  格式化历史为: "用户: ...\nAI计划: ..."
+      │  首次为空 → 返回 "(无)"
+      ▼
+  ② beginTurn("abc", "A产品销量如何")
+      │  创建 PendingTurn { question="A产品销量如何", plan="" }
+      ▼
+  ③ compiledGraph.stream(MULTI_TURN_CONTEXT=历史上下文)
+      │  注入到 StateGraph 初始状态
+      │
+      │  ┌──────────────────────────────────────┐
+      │  │ 各节点从 state 读取 MULTI_TURN_CONTEXT │
+      │  │ 用于指代消解、上下文补全               │
+      │  └──────────────────────────────────────┘
+      │
+      │  PlannerNode 流式输出时：
+      ▼
+  ④ appendPlannerChunk("abc", "chunk...")
+      │  持续追加到 PendingTurn.planBuilder
+      ▼
+  ⑤ 流结束 → finishTurn("abc")
+         PendingTurn → 移入 history 队列
+         plan 截断到 2000 字符
+         history 限制最近 5 轮
+
+  关键配置
+
+  maxturnhistory = 5     // 最多保留 5 轮对话
+  maxplanlength = 2000   // 每轮 plan 最多 2000 字符
+
+  多轮上下文在工作流中的使用
+
+  4 个节点读取 MULTI_TURN_CONTEXT，用于不同目的：
+
+  IntentRecognitionNode ─── "他们呢？" 是否是数据分析？
+                              需要历史才能判断
+                                  │
+  EvidenceRecallNode ─────── 指代消解 + 查询改写
+                              "那投诉率是多少" → "A产品上个月的投诉率"
+                                  │
+  QueryEnhanceNode ────────── 查询规范化 + 时间解析 + 业务术语解析
+                              "那换个维度看看" → 明确的完整查询
+                                  │
+  FeasibilityAssessmentNode ── 判断需求是否可执行
+                              结合历史理解追问意图
+
+  具体示例（EvidenceRecallNode 的指代消解）
+
+  Prompt evidence-query-rewrite.txt 中：
+
+  【多轮输入】
+  用户: A产品的销量如何
+  AI计划: ...
+
+  <最新>用户输入: 那投诉率是多少
+
+  → LLM 输出改写后的查询: "查询A产品的投诉率数据"
+
+  消息持久化流程
+
+  工作流本身不写数据库，消息持久化完全由前端驱动：
+
+  前端                                 后端
+   │                                    │
+   │─ POST /sessions/{id}/messages ────>│  保存用户消息 (role=user)
+   │   { role:"user", content:"..." }   │
+   │                                    │
+   │─ GET /api/stream/search ─────────>│  执行工作流
+   │   (threadId, query)                │
+   │<── SSE 流式响应 ──────────────────│
+   │                                    │
+   │─ POST /sessions/{id}/messages ────>│  保存助手回复 (role=assistant)
+   │   { role:"assistant", content:... }│
+
+  人工拒绝计划时的记忆处理
+
+  用户拒绝计划
+      │
+      ▼
+  restartLastTurn(threadId)
+      │  1. 从 history 中移除最后一轮
+      │  2. 用相同问题创建新的 PendingTurn
+      │
+      ▼
+  重新 buildContext → 重新注入 MULTI_TURN_CONTEXT
+      │
+      ▼
+  PlannerNode 重新生成计划（结合用户反馈）
+
+  总结
+
+  ┌──────────┬────────────────────────────────┬─────────────────────────────┐
+  │   特性   │             持久层             │        运行时记忆层         │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 存储     │ MySQL (chat_session +          │ 内存 ConcurrentHashMap      │
+  │          │ chat_message)                  │                             │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 内容     │ 完整消息（用户/助手）          │ 压缩摘要（问题 +            │
+  │          │                                │ 计划，各2000字）            │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 用途     │ 前端展示、历史回看             │ AI 推理时的上下文注入       │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 管理方   │ 前端 REST API                  │ GraphServiceImpl            │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 生命周期 │ 永久                           │ 服务重启丢失（TODO          │
+  │          │                                │ 待持久化）                  │
+  ├──────────┼────────────────────────────────┼─────────────────────────────┤
+  │ 容量     │ 无限制                         │ 最多 5 轮                   │
+  └──────────┴────────────────────────────────┴─────────────────────────────┘
+
+✻ Worked for 9m 22s
